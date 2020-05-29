@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NittanyPATH - Comments</title>
+    <style>
+{#        outside#}
+        body{background-color: #baf5ff}
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #bfdfe2; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.post{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.comment{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.write{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: cornflowerblue; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        button {background-color: antiquewhite; padding: 6px 20px 6px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        a.bar {background-color: antiquewhite; padding: 5px 20px 5px 20px; border: 1px solid black; text-decoration: none; color: black;}
+    {#    graph#}
+        table{width: 1300px}
+        th{padding: 1px; background-color: #6db4d1; border: 1px groove #c9c9c9
+        }
+        td{padding: 1px; background-color: #cbedf0;
+        }
+    </style>
+</head>
+<body>
+   <div class="nav">
+       <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/student">NittanyPATH</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/course">Course</a></li>
+                <li><a href="/classmates">Classmates</a></li>
+                <li><a href="/homework" >Homework</a></li>
+                <li><a href="/exam">Exam</a></li>
+                <li><a href="/announcements">Announcement</a></li>
+                <li><a href="/forum" style="background-color: cornflowerblue; color:white; border: 1px solid black;">Forum</a></li>
+                <li><a href="/inbox">Message</a></li>
+                <li><a href="/appointment">Appointment</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+       </fieldset>
+    </div>
+    <div class="post">
+        <fieldset>
+            <legend>Post</legend>
+                {% for class, title, name, fdesc, date, time in forum %}
+                    <h4>{{ title }}</h4>
+                    <p>Post by: {{ name }}</p>
+                    <p>Posted at {{ date }}, {{ time }}</p>
+                    <div class="postbox">{{ fdesc }}</div>
+                {% endfor %}
+        </fieldset>
+    </div>
+    <div class="comment">
+        <fieldset>
+            <legend>Comments</legend>
+                {% for date, time, name, cdesc in comment %}
+                    <div class="commentbox"><p> {{ cdesc }} Post by: {{ name }} Posted at {{ date }}, {{ time }}</p> </div>
+                {% endfor %}
+        </fieldset>
+    </div>
+    </div>
+    <div class="write">
+        <fieldset>
+            <form action="/comment" method="POST">
+            <legend> Write Comment </legend>
+            <textarea name="com" cols="100" rows="10"></textarea>
+                <br>
+                <button type="submit">Upload Comment</button>
+            </form>
+        </fieldset>
+    </div>
+    <a class="bar" href="/forum" role="button">Back</a>
+</body>
+</html>

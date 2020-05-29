@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NittanyPATHe</title>
+        <style>
+{#        outside#}
+        body{background-color: #ffcece
+        }
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #eab0bc; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.profile{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.student{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.comingup{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.forum{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: #ed7f7c; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        a.only:hover{background-color: cornflowerblue;}
+    {#    graph#}
+        table{width: 1200px}
+        th{padding: 1px; background-color: #d15959; border: 1px groove #c9c9c9
+        }
+        td{padding: 1px; background-color: #ffc0b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/TATA" style="background-color: #ed7f7c; color:white; border: 1px solid black;">NittanyPATH</a></li>
+                <li><a href="/studentsTATA">Students</a></li>
+                <li><a href="/homeworkTATA">Homework</a></li>
+                <li><a href="/examTATA">Exam</a></li>
+                <li><a href="/announcementsTATA">Announcement</a></li>
+                <li><a href="/forumTATA">Forum</a></li>
+                <li><a class="only" href="/TA">Student Mode</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="profile">
+        <fieldset>
+            <legend>My Profile</legend>
+                <table>
+                <tr>
+                    <th scope="Name"> Name</th>
+                    <th scope="Email"> Email</th>
+                    <th scope="Age"> Age</th>
+                    <th scope="Gender"> Gender</th>
+                    <th scope="Title"> Title</th>
+                </tr>
+                <tbody>
+                {% for Name, Email, Age, Gender, Title in myinfo %}
+                    <tr>
+                        <td> {{ Name }} </td>
+                        <td> {{ Email }} </td>
+                        <td> {{ Age }} </td>
+                        <td> {{ Gender }} </td>
+                        <td> {{ Title }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+        </fieldset>
+    </div>
+    <div class="student">
+        <fieldset>
+            <legend>My Students</legend>
+                <table>
+                <tr>
+                    <th scope="cabbr"> Class</th>
+                    <th scope="cname"> Name</th>
+                    <th scope="snum"> Section</th>
+                    <th scope="age"> Age</th>
+                    <th scope="gender"> Gender</th>
+                    <th scope="major"> Major</th>
+                </tr>
+                <tbody>
+                {% for cabbr, cname, snum, age, gender, major in mystudent %}
+                    <tr>
+                        <td> {{ cabbr }} </td>
+                        <td> {{ cname }} </td>
+                        <td> {{ snum }} </td>
+                        <td> {{ age }} </td>
+                        <td> {{ gender }} </td>
+                        <td> {{ major }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+        </fieldset>
+    </div>
+    <div class="comingup">
+        <fieldset>
+            <legend>Coming up</legend>
+            <table>
+                <tr>
+                    <th scope="cname"> Class</th>
+                    <th scope="dname"> Name</th>
+                    <th scope="desc"> Description</th>
+                </tr>
+                <tbody>
+                {% for cname, dname, desc in mydue %}
+                    <tr>
+                        <td> {{ cname }} </td>
+                        <td> {{ dname }} </td>
+                        <td> {{ desc }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>

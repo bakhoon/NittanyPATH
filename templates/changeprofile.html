@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NittanyPATH - Change Profile</title>
+    <style>
+{#        outside#}
+        body{background-color: #baf5ff}
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #bfdfe2; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.profile{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: cornflowerblue; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        a.bar {background-color: antiquewhite; padding: 5px 20px 5px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        button {background-color: antiquewhite; padding: 6px 20px 6px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        div.inside{background-color: #bfdfe2; margin: 0px 0px 10px 0px; padding:5px; line-height:25px}
+        button:hover {cursor:pointer;}
+    {#    graph#}
+        table{width: 1200px}
+        th{padding: 1px; background-color: #6db4d1; border: 1px groove #c9c9c9
+        }
+        td{padding: 1px; background-color: #cbedf0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/student" >NittanyPATH</a></li>
+                <li><a href="/profile" style="background-color: cornflowerblue; color:white; border: 1px solid black;">Profile</a></li>
+                <li><a href="/course">Course</a></li>
+                <li><a href="/classmates">Classmates</a></li>
+                <li><a href="/homework">Homework</a></li>
+                <li><a href="/exam">Exam</a></li>
+                <li><a href="/announcements">Announcement</a></li>
+                <li><a href="/forum">Forum</a></li>
+                <li><a href="/inbox">Message</a></li>
+                <li><a href="/appointment">Appointment</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    <br>
+    <div class="profile">
+        <fieldset>
+            <legend>My Profile</legend>
+        {% for fname, lname, password, Email, Age, Gender, Major, phone, street, zipcode, city, state  in myinfo %}
+            <form action="/changeprofile" method="POST">
+            <br>
+                <div class="inside">
+                    <label for="fname"><b>First name:</b> </label>
+                    <input type="text" name="fname" size="30" maxlength="30" required class = "form-control" value = {{ fname }}> <br>
+                    <label for="lname"><b>Last name:</b></label>
+                    <input type="text" name="lname" size="30" maxlength="30" required class = "form-control" value = {{ lname }}> <br>
+                    <label for="phone"><b>Phone number:</b></label>
+                    <input type="text" name="phone" size="30" maxlength="30" required class = "form-control" value = {{ phone }}> <br>
+                    <label for="Street"><b>Street:</b></label>
+                    <input type="text" name="street" size="30" maxlength="30" required class = "form-control" value = "{{ street }}"> <br>
+                    <label for="City"><b>City:</b></label>
+                    <input type="text" name="city" size="30" maxlength="30" required class = "form-control" value = "{{ city }}"> <br>
+                    <label for="City"><b>State:</b></label>
+                    <input type="text" name="state" size="30" maxlength="30" required class = "form-control" value = "{{ state }}"> <br>
+                    <label for="City"><b>Zipcode:</b></label>
+                    <input type="text" name="zipcode" size="30" maxlength="30" required class = "form-control" value = {{ zipcode }}> <br> <br>
+                    <button type="submit">Change</button>
+                    <a class="bar" href="/profile" role="button">Back</a>
+                </div>
+            </form>
+        {% endfor %}
+    </fieldset>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NittanyPATH - Appointments</title>
+<style>
+{#        outside#}
+        body{background-color: #baf5ff}
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #bfdfe2; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.appointment{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: cornflowerblue; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        button {background-color: antiquewhite; padding: 6px 20px 6px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        a.bar {background-color: antiquewhite; padding: 5px 20px 5px 20px; border: 1px solid black; text-decoration: none; color: black;}
+    {#    graph#}
+        table{width: 1300px}
+        th{padding: 1px; background-color: #6db4d1; border: 1px groove #c9c9c9
+        }
+        td{padding: 1px; background-color: #cbedf0;
+        }
+    </style>
+</head>
+<body>
+   <div class="nav">
+       <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/student">NittanyPATH</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/course">Course</a></li>
+                <li><a href="/classmates">Classmates</a></li>
+                <li><a href="/homework" >Homework</a></li>
+                <li><a href="/exam">Exam</a></li>
+                <li><a href="/announcements">Announcement</a></li>
+                <li><a href="/forum" >Forum</a></li>
+                <li><a href="/inbox">Message</a></li>
+                <li><a href="/appointment" style="background-color: cornflowerblue; color:white; border: 1px solid black;">Appointment</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+       </fieldset>
+    </div>
+    <div class="appointment">
+        <fieldset>
+            <legend>Appointments</legend>
+                <table>
+                <tr>
+                    <th scope="email"> With</th>
+                    <th scope="title"> Title</th>
+                    <th scope="date"> Date</th>
+                    <th scope="time"> Time</th>
+                    <th scope="note"> Note</th>
+                    <th scope="delete"> Note</th>
+                </tr>
+                <tbody>
+                {% for date, time, title, note, email in myappo %}
+                    <form action="/appointment" method="POST">
+                    <tr>
+                        <td> <input type="text" name="email" value="{{ email }}" readonly="readonly" style="display: none" /> {{ email }} </td>
+                        <td> <input type="text" name="title" value="{{ title }}" readonly="readonly" style="display: none" /> {{ title }}</td>
+                        <td> <input type="text" name="date" value="{{ date }}" readonly="readonly" style="display: none" /> {{ date }} </td>
+                        <td> <input type="text" name="time" value="{{ time }}" readonly="readonly" style="display: none" /> {{ time }} </td>
+                        <td> <input type="text" name="note" value="{{ note }}" readonly="readonly" style="display: none" /> {{ note }} </td>
+                        <td> <button type="submit"> Delete </button> </td>
+                    </tr>
+                    </form>
+                {% endfor %}
+                </tbody>
+                </table>
+        <br>
+                <a class="bar" href="/newappointment" role="button">Make a new Appointment</a>
+        </fieldset>
+    </div>
+</body>
+</html>

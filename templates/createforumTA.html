@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NittanyPATH - Create Forum</title>
+    <style>
+{#        outside#}
+        body{background-color: #baf5ff}
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #bfdfe2; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.create{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: cornflowerblue; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        button {background-color: antiquewhite; padding: 6px 20px 6px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        a.bar {background-color: antiquewhite; padding: 5px 20px 5px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        a.only:hover{background-color: #ed7f7c;}
+    {#    graph#}
+        table{width: 1300px}
+        th{padding: 1px; background-color: #6db4d1; border: 1px groove #c9c9c9
+        }
+        td{padding: 1px; background-color: #cbedf0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <fieldset style="border:0 none">
+             <ul>
+                <li><a href="/TA" >NittanyPATH</a></li>
+                <li><a href="/profileTA">Profile</a></li>
+                <li><a href="/courseTA">Course</a></li>
+                <li><a href="/classmatesTA">Classmates</a></li>
+                <li><a href="/homeworkTA">Homework</a></li>
+                <li><a href="/examTA">Exam</a></li>
+                <li><a href="/announcementsTA">Announcement</a></li>
+                <li><a href="/forumTA" style="background-color: cornflowerblue; color:white; border: 1px solid black;">Forum</a></li>
+                <li><a href="/inboxTA">Message</a></li>
+                <li><a href="/appointmentTA">Appointment</a></li>
+                <li><a class="only" href="/TATA">TA mode</a></li>
+                <li><a href="/login">Logout</a></li>
+             </ul>
+        </fieldset>
+    </div>
+    <div class="create">
+        <fieldset>
+            <legend>Create Post</legend>
+                <form action="/createforumTA" method="POST">
+                    <select name="cid">
+                        {% for cid in myclass %}
+                            <option value="{{ cid }}">{{ cid }}</option>
+                        {% endfor %}
+                    </select>
+                    <p>Title:
+                    <input type="text" name="title" size="50"/></p>
+                    <p>Description: </p>
+                    <textarea name="note" cols="100" rows="10">
+                    </textarea><br>
+                    <button type="submit">Upload Post</button>
+                    <a class="bar" href="/forumTA" role="button">Back</a>
+                </form>
+        </fieldset>
+    </div>
+</body>
+</html>

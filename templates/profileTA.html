@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NittanyPATH - Profile</title>
+    <style>
+{#        outside#}
+        body{background-color: #baf5ff}
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #bfdfe2; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.profile{background-color: #bfdfe2; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.inside{background-color: #bfdfe2; margin: 0px 0px 10px 0px; padding:5px; line-height:25px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: cornflowerblue; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        a.only:hover{background-color: #ed7f7c;}
+        a.bar {background-color: antiquewhite; padding: 5px 20px 5px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        a.only:hover{background-color: #ed7f7c;}
+        {#graph#}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/TA" >NittanyPATH</a></li>
+                <li><a href="/profileTA" style="background-color: cornflowerblue; color:white; border: 1px solid black;">Profile</a></li>
+                <li><a href="/courseTA">Course</a></li>
+                <li><a href="/classmatesTA">Classmates</a></li>
+                <li><a href="/homeworkTA">Homework</a></li>
+                <li><a href="/examTA">Exam</a></li>
+                <li><a href="/announcementsTA">Announcement</a></li>
+                <li><a href="/forumTA">Forum</a></li>
+                <li><a href="/inboxTA">Message</a></li>
+                <li><a href="/appointmentTA">Appointment</a></li>
+                <li><a class="only" href="/TATA">TA mode</a></li>
+                <li><a href="/login">Logout</a></li>
+             </ul>
+        </fieldset>
+    </div>
+    <br>
+    <div class="profile">
+         <fieldset>
+            <legend>My Profile</legend>
+        {% for fname, lname, password, Email, Age, Gender, Major, phone, Street, Zipcode, city, state  in myinfo %}
+            <div class="inside">
+                <label> <b>First name:</b> {{ fname }} </label> <br>
+                <label> <b>Last name: </b>{{ lname }}</label> <br>
+                <label> <b>Password: </b> <i>Hidden</i> </label>  <br>
+                <label> <b>Email: </b>{{ Email }} </label> <br>
+                <label> <b>Age: </b>{{ Age }} </label> <br>
+                <label> <b>Gender: </b>{{ Gender }} </label> <br>
+                <label> <b>Major: </b>{{ Major }} </label> <br>
+                <label> <b>Phone: </b>{{ phone }} </label> <br>
+                <label> <b>Street: </b>{{ Street }} </label> <br>
+                <label> <b>City: </b>{{ city }} </label> <br>
+                <label> <b>State: </b>{{ state }} </label> <br>
+                <label> <b>Zipcode: </b>{{ Zipcode }} </label>  <br>
+            </div>
+        {% endfor %}
+        <a class="bar" href="/changeprofileTA" role="button">Change Profile</a>
+        <a class="bar" href="/changepasswordTA" role="button">Change Password</a>
+         </fieldset>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NittanyPATH - Homework</title>
+<style>
+{#        outside#}
+        body{background-color: #ffcece
+        }
+        legend{background-color: darkgrey; border: 2px solid; color: azure; border: 1px solid black; text-shadow: 1px 1px 1px black; font-size: 24px; font-family: Optima, sans-serif;}
+        div.nav{background-color: #eab0bc; margin: 50px 50px 20px 50px; -ms-transform: translateY(-50%);
+                transform: translateY(-50%); text-align: center; padding: 10px 0px 20px 10px; border: 1px solid black;}
+        div.homework{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.schedule{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.comingup{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        div.forum{background-color: #e2c4c7; margin: 0px 0px 10px 0px; border: 1px solid black; padding:10px}
+        ul {list-style-type: none;}
+        li {float: left;}
+        li a{padding: 14px; border: 1px solid; background-color: antiquewhite; text-align: center; text-decoration: none; color: black; font-family: Comic Sans MS, Comic Sans, cursive;}
+        li a:hover{color:white; background-color: #ed7f7c; border: 1px solid black;}
+        li a:active{color:black; background-color: antiquewhite; border: 1px solid black;}
+        a.bar {background-color: antiquewhite; padding: 5px 20px 5px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        button {background-color: antiquewhite; padding: 6px 20px 6px 20px; border: 1px solid black; text-decoration: none; color: black;}
+        a.only:hover{background-color: cornflowerblue;}
+    {#    graph#}
+        table{width: 1200px}
+        th{padding: 1px; background-color: #d15959; border: 1px groove #c9c9c9
+        }
+        td{padding: 1px; background-color: #ffc0b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/TATA">NittanyPATH</a></li>
+                <li><a href="/studentsTATA">Students</a></li>
+                <li><a href="/homeworkTATA" style="background-color: #ed7f7c; color:white; border: 1px solid black;">Homework</a></li>
+                <li><a href="/examTATA">Exam</a></li>
+                <li><a href="/announcementsTATA" >Announcement</a></li>
+                <li><a href="/forumTATA">Forum</a></li>
+                <li><a class="only" href="/TA">Student Mode</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="homework">
+        <fieldset>
+            <legend>Homework</legend>
+            <table>
+                <tr>
+                    <th scope="cabbr"> Class</th>
+                    <th scope="time"> Section</th>
+                    <th scope="cname"> Name</th>
+                    <th scope="desc"> Description</th>
+                    <th scope="change"> Change Grade</th>
+                </tr>
+                <tbody>
+                {% for class, sec, homework, hwdesc in hwdue %}
+                    <form action="/homeworkTATA", method="POST">
+                        <tr>
+                            <td> <input type="text" name="class" value="{{ class }}" readonly="readonly" style="display: none"/> {{ class }}</td>
+                            <td> <input type="text" name="sec" value="{{ sec }}" readonly="readonly" style="display: none"/> {{ sec }}</td>
+                            <td> <input type="text" name="homework" value="{{ homework }}" readonly="readonly" style="display: none"/> {{ homework }}</td>
+                            <td> <input type="text" name="hwdesc" value="{{ hwdesc }}" readonly="readonly" style="display: none"/> {{ hwdesc }}</td>
+                            <td> <button type="submit"> Change Grade </button> </td>
+                        </tr>
+                    </form>
+                {% endfor %}
+                </tbody>
+                </table>
+        </fieldset>
+    </div>
+</body>
+</html>
