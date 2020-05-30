@@ -1,0 +1,64 @@
+:root {
+  --text-color: #f0f4f5;
+  --accent-color: #263343;
+  --background-color: #468ac2;
+  --background-color2: rgb(49, 79, 112);
+}
+
+body {
+  background-color: var(--background-color2);
+  color: white;
+  font-family: "Work Sans", sans-serif;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(43, 59, 87);
+  padding: 30px 50px 30px 30px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  box-shadow: 5px 10px 10px #7e8d99;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  padding: 50px 30px;
+}
+
+form {
+  padding: 30px 0;
+}
+
+.input {
+  padding: 5px 0;
+  margin: 5px 0;
+}
+
+.login-button {
+  width: 100%;
+  margin-top: 9px;
+  margin-left: 1px;
+  border-radius: 30px;
+  background-color: rgb(86, 204, 112);
+}
+
+.login-button:hover {
+  background: transparent;
+  border-radius: 30px;
+  color: var(--text-color);
+  transition: color 0.3s ease 0s, background 0s ease 0s;
+}
+
+input {
+  width: 100%;
+  border-radius: 4px;
+}
+
+input::placeholder {
+  text-align: center;
+  font-size: 8px;
+}

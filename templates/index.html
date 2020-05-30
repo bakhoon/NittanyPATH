@@ -6,20 +6,73 @@
 
     <!-- flask link css -->
     <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
+    />
+
+    <link rel="stylesheet" href="/static/style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
   </head>
+  <!-- did not work on css file -->
+  <style>
+    .welcome .content button {
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+      color: var(--accent-color);
+      background-color: rgb(22, 26, 29);
+      display: inline-block;
+      overflow: hidden;
+      padding: 8px 20px;
+      margin: 0px 3px 6px;
+      text-align: center;
+      border: 2px solid var(--text-color);
+      text-decoration: none;
+      white-space: nowrap;
+      width: 90%;
+      /* left: 10em; */
+    }
+
+    .welcome .content button:hover {
+      background: transparent;
+      color: var(--text-color);
+      transition: color 0.3s ease 0s, background 0s ease 0s;
+    }
+    .welcome .content button::before {
+      position: absolute;
+      content: "";
+      background: rgb(255, 255, 255);
+      transition-duration: 0.3s;
+      z-index: -1;
+      top: 0px;
+      right: auto;
+      bottom: auto;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+
+    .welcome .content button:hover::before {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+  </style>
 
   <body>
     <section class="welcome">
       <div class="content">
         <header class="header">
-          <h2>WELCOME TO NITANNY PATH</h2>
+          <h2>WELCOME TO NITANNY PATH!</h2>
         </header>
 
         <button
-          class="waves-effect waves-light btn"
+          class="intro-button"
           type="button"
           onclick="location.href='/login'"
         >
@@ -28,10 +81,10 @@
 
         <div class="main">
           <p>
-            Welcome to our wonderful school! We have many different computer
-            science and mathematic that you never learned of. This website helps
-            you to get everything track within the course, schedule, grade,
-            relationship, and etc. Come and use this NittanyPATH!
+            This application provides you a very simple interface to communicate
+            with your professors, students, and teaching assistants. This helps
+            you to get everything track within the course, schedule, and grades
+            for your best academic performance.
           </p>
         </div>
 

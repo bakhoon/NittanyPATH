@@ -1,17 +1,20 @@
 :root {
   --text-color: #f0f4f5;
   --accent-color: #263343;
+  --background-color: #468ac2;
+  --background-color2: rgb(49, 79, 112);
 }
 body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  font-family: "Work Sans", sans-serif;
 }
 
 .welcome {
   display: flex;
   position: relative;
-  background: #468ac2;
+  background: var(--background-color);
   color: var(--text-color);
   height: 100vh;
   align-items: center;
@@ -31,23 +34,66 @@ body {
   margin: 0 0 10px;
   color: var(--text-color);
 }
-.welcome button {
+
+/* button */
+.welcome .content button {
   position: relative;
   z-index: 1;
   cursor: pointer;
-  color: white;
+  color: var(--accent-color);
   background-color: rgb(22, 26, 29);
+  display: inline-block;
+  overflow: hidden;
+  padding: 8px 20px;
+  margin: 0px 3px 6px;
+  text-align: center;
+  border: 2px solid var(--text-color);
+  text-decoration: none;
+  white-space: nowrap;
+  width: 90%;
+  /* left: 10em; */
 }
 
+.welcome .content button:hover {
+  background: transparent;
+  color: var(--text-color);
+  transition: color 0.3s ease 0s, background 0s ease 0s;
+}
+.welcome .content button::before {
+  position: absolute;
+  content: "";
+  background: rgb(255, 255, 255);
+  transition-duration: 0.3s;
+  z-index: -1;
+  top: 0px;
+  right: auto;
+  bottom: auto;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.welcome .content button:hover::before {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+/* paragraph */
 .welcome p {
   position: relative;
   z-index: 1;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.705);
   line-height: 1.5;
   margin: 10px;
+  width: 100%;
+  right: 6px;
+  top: 10px;
 }
 
+/* wave */
 .waves {
   position: absolute;
   bottom: 0;
@@ -90,3 +136,10 @@ body {
     transform: translate(-50%, -75%) rotate(360deg);
   }
 }
+
+/* @media screen and (max-width: 414px) {
+  body {
+    width: 100%;
+    font-size: 24px;
+  }
+} */

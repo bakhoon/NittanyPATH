@@ -8,6 +8,12 @@ import hashlib
 app = Flask(__name__)
 # app.static_folder = 'static'
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 myid = None
 mypw = None
 temppostnum = None
@@ -28,11 +34,6 @@ latedropnotice = ' '
 
 
 # csvfile.get_data()
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
