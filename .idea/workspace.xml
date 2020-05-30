@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26172511-48f4-495f-b961-aec865486998" name="Default Changelist" comment="" />
+    <list default="true" id="26172511-48f4-495f-b961-aec865486998" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,6 +69,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ZcdnEuwLavtK4QMCIWgSsYW4Xg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -77,6 +82,7 @@
     <property name="DatabaseDriversLRU" value="mysql&#10;sqlite" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowPython Console.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -87,6 +93,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -97,7 +104,28 @@
       <recent name="C:\Users\HP\PycharmProjects\NittanyPath" />
     </key>
   </component>
-  <component name="RunManager" selected="Flask server.NittanyPath">
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NittanyPath" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="csvonly" type="PythonConfigurationType" factoryName="Python">
       <module name="NittanyPath" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,9 +164,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Flask server.NittanyPath" />
+      <item itemvalue="Python.app" />
       <item itemvalue="Python.csvonly" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.app" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -179,6 +212,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="415" y="53" key="#app" timestamp="1590784107034">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="415" y="53" key="#app/-1920.23.1920.1057/0.23.1440.832@0.23.1440.832" timestamp="1590784107034" />
     <state x="440" y="83" width="1092" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586132313106">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -192,26 +229,30 @@
     </state>
     <state x="704" y="236" key="FileChooserDialogImpl/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1588623571979" />
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585143772980" />
-    <state width="1877" height="226" key="GridCell.Tab.0.bottom" timestamp="1588102416951">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1379" height="202" key="GridCell.Tab.0.bottom" timestamp="1590810728032">
+      <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1323" height="142" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1587837366020" />
     <state width="1877" height="226" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1588102416951" />
-    <state width="1877" height="226" key="GridCell.Tab.0.center" timestamp="1588102416950">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1379" height="202" key="GridCell.Tab.0.bottom/-1920.23.1920.1057/0.23.1440.832@0.23.1440.832" timestamp="1590810728032" />
+    <state width="1379" height="202" key="GridCell.Tab.0.center" timestamp="1590810728029">
+      <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1323" height="142" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1587837366020" />
     <state width="1877" height="226" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1588102416950" />
-    <state width="1877" height="226" key="GridCell.Tab.0.left" timestamp="1588102416950">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1379" height="202" key="GridCell.Tab.0.center/-1920.23.1920.1057/0.23.1440.832@0.23.1440.832" timestamp="1590810728029" />
+    <state width="1379" height="202" key="GridCell.Tab.0.left" timestamp="1590810728029">
+      <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1323" height="142" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1587837366020" />
     <state width="1877" height="226" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1588102416950" />
-    <state width="1877" height="226" key="GridCell.Tab.0.right" timestamp="1588102416950">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1379" height="202" key="GridCell.Tab.0.left/-1920.23.1920.1057/0.23.1440.832@0.23.1440.832" timestamp="1590810728029" />
+    <state width="1379" height="202" key="GridCell.Tab.0.right" timestamp="1590810728032">
+      <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state width="1323" height="142" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1920.1040@-1366.0.1366.728" timestamp="1587837366020" />
     <state width="1877" height="226" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1588102416950" />
+    <state width="1379" height="202" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1440.832@0.23.1440.832" timestamp="1590810728032" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1587697143478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -228,6 +269,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1587697143478" />
+    <state x="221" y="78" key="SettingsEditor" timestamp="1590784141942">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="221" y="78" key="SettingsEditor/-1920.23.1920.1057/0.23.1440.832@0.23.1440.832" timestamp="1590784141942" />
     <state x="-954" y="141" width="540" height="524" key="StructurePopup" timestamp="1587060405334">
       <screen x="-1366" y="0" width="1366" height="728" />
     </state>
@@ -264,9 +309,5 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1366.0.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1587164601113" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NittanyPath$NittanyPath.coverage" NAME="NittanyPath Coverage Results" MODIFIED="1588028264818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NittanyPath$csvonly.coverage" NAME="csvonly Coverage Results" MODIFIED="1586044769357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
