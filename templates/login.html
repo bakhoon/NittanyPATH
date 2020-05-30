@@ -1,38 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NittanyPATH - Login</title>
     <style>
-        body {margin: 100px; background-color: #59d69e; }
-        div.front {margin: 10px auto 10px auto;
-            padding: 40px; background-color: #bfdfe2; border: 2px solid;
-            font-family: Arial, Verdana, sans-serif; line-height: 30px}
-        h1 {font-family: sans-serif; background-color: darkgrey; border: 2px solid; padding: 10px; text-shadow: 0.5px 0.5px 1px; color:black}
-        button {background-color: antiquewhite; padding: 6px 20px 6px 20px; border: 1px solid black; text-decoration: none; color: black;}
+      body {
+        margin: 100px;
+        background-color: #59d69e;
+      }
+      div.front {
+        margin: 10px auto 10px auto;
+        padding: 40px;
+        background-color: #bfdfe2;
+        border: 2px solid;
+        font-family: Arial, Verdana, sans-serif;
+        line-height: 30px;
+      }
+      h1 {
+        font-family: sans-serif;
+        background-color: darkgrey;
+        border: 2px solid;
+        padding: 10px;
+        text-shadow: 0.5px 0.5px 1px;
+        color: black;
+      }
+      button {
+        background-color: antiquewhite;
+        padding: 6px 20px 6px 20px;
+        border: 1px solid black;
+        text-decoration: none;
+        color: black;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="front">
-        <div id="title_div">
-            <h1>NittanyPATH</h1>
+      <div id="title_div">
+        <h1>NittanyPATH</h1>
+      </div>
+      <form action="/login" , method="POST">
+        <div class="input">
+          <label for="email">Email:</label>
+          <input
+            type="text"
+            name="iemail"
+            size="30"
+            maxlength="30"
+            required
+            class="form-control"
+            placeholder="Enter without @nittany.edu"
+          />
+          <br />
         </div>
-        <form action="/login", method="POST">
-            <div class="input">
-                <label for="email">Email:</label>
-                <input type="text" name="iemail" size="30" maxlength="30" required class = "form-control" placeholder = 'Enter without @nittany.edu'>
-                <br>
-            </div>
-            <div class="input">
-                <label for="password">Password:</label>
-                <input type="password" name="ipassword" size="26" maxlength="30" required class = "form-control">
-                <br>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-        <p>{{ notice }}</p>
+        <div class="input">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            name="ipassword"
+            size="26"
+            maxlength="30"
+            required
+            class="form-control"
+          />
+          <br />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p>{{ notice }}</p>
     </div>
-
-</body>
+  </body>
 </html>

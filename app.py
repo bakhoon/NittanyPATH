@@ -5,6 +5,9 @@ from datetime import datetime
 import hashlib
 
 
+app = Flask(__name__)
+# app.static_folder = 'static'
+
 myid = None
 mypw = None
 temppostnum = None
@@ -23,9 +26,10 @@ enrollnotice = ' '
 takingnotice = ' '
 latedropnotice = ' '
 
-app = Flask(__name__)
 
-#csvfile.get_data()
+# csvfile.get_data()
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -46,11 +50,13 @@ def login():
         print(mypw)
 
         connection = sql.connect('database.db')
-        cursor = connection.execute('Select S.semail, S.password FROM Students S')
+        cursor = connection.execute(
+            'Select S.semail, S.password FROM Students S')
         getSemail = cursor.fetchall()
         cursor = connection.execute('Select TA.semail, TA.password FROM TA')
         getTAemail = cursor.fetchall()
-        cursor = connection.execute('Select P.pemail, P.password FROM Professors P')
+        cursor = connection.execute(
+            'Select P.pemail, P.password FROM Professors P')
         getPemail = cursor.fetchall()
         setStudent = []
         for set in getSemail:
@@ -87,7 +93,8 @@ def student():
         mygender = 'Female'
     elif myinfo[0][4] == 'M':
         mygender = 'Male'
-    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1], myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
+    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1],
+                    myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
     setinfo = [(None, None, None, None, None)]
     setinfo[0] = changemyinfo
     # my course
@@ -102,7 +109,8 @@ def student():
     for set in myschedule:
         profname = 'Professor ' + set[3] + ' ' + set[4]
         profemail = set[5] + '@Nittanystate.edu'
-        setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7]])
+        setschedule.append([set[0], set[1], set[2], profname,
+                            profemail, set[6] + ' ' + set[7]])
     # my coming up
     cursor = connection.execute('SELECT E.cid, H.hw_no, H.hwdesc, HG.grade '
                                 'FROM Students S, Enrolls E, Homeworks H, Homeworks_grade HG '
@@ -148,7 +156,8 @@ def profile():
             tempgender = 'Female'
         elif set[5] == 'M':
             tempgender = 'Male'
-        getinfo.append([set[0], set[1], set[2], set[3], set[4], tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
+        getinfo.append([set[0], set[1], set[2], set[3], set[4],
+                        tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
     if getinfo:
         return render_template('profile.html', error=error, myinfo=getinfo)
     else:
@@ -171,7 +180,8 @@ def changeprofile():
             tempgender = 'Female'
         elif set[5] == 'M':
             tempgender = 'Male'
-        getinfo.append([set[0], set[1], set[2], set[3], set[4], tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
+        getinfo.append([set[0], set[1], set[2], set[3], set[4],
+                        tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
     if request.method == 'POST':
         getfname = request.form['fname']
         getlname = request.form['lname']
@@ -205,7 +215,7 @@ def changeprofile():
             connection.commit()
         else:
             connection.execute(
-            'INSERT INTO Zipcodes (zipcode, city) VALUES (?,?)', (getzipcode, getcity))
+                'INSERT INTO Zipcodes (zipcode, city) VALUES (?,?)', (getzipcode, getcity))
             connection.commit()
         if getcity in cities:
             connection.execute(
@@ -216,7 +226,7 @@ def changeprofile():
             connection.commit()
         else:
             connection.execute(
-            'INSERT INTO Cities (city, state) VALUES (?,?)', (getcity, getstate))
+                'INSERT INTO Cities (city, state) VALUES (?,?)', (getcity, getstate))
             connection.commit()
         return redirect('/profile')
     if getinfo:
@@ -291,7 +301,6 @@ def classmates():
     return render_template('classmates.html', error=error)
 
 
-
 @app.route('/course', methods=['POST', 'GET'])
 def course():
     global enrollnotice
@@ -337,22 +346,28 @@ def course():
         print(examgrade)
         tempnum = 1
         if len(examgrade) == 0 and len(hwgrade) == 0:
-            setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], ' '])
+            setschedule.append([set[0], set[1], set[2], profname,
+                                profemail, set[6] + ' ' + set[7], set[8], ' '])
         elif len(examgrade) == 0:
             finalgrade = (sum(hwgrade) / len(hwgrade))
             final2deci = "{:.2f}".format(finalgrade)
-            setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], final2deci])
+            setschedule.append([set[0], set[1], set[2], profname,
+                                profemail, set[6] + ' ' + set[7], set[8], final2deci])
         elif len(hwgrade) == 0:
             finalgrade = (sum(examgrade) / len(examgrade))
             final2deci = "{:.2f}".format(finalgrade)
-            setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], final2deci])
+            setschedule.append([set[0], set[1], set[2], profname,
+                                profemail, set[6] + ' ' + set[7], set[8], final2deci])
         else:
             if ' ' in examgrade or ' ' in hwgrade:
-                setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], ' '])
+                setschedule.append(
+                    [set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], ' '])
             else:
-                finalgrade = (sum(examgrade) / len(examgrade)) * 0.7 + (sum(hwgrade) / len(hwgrade)) * 0.3
+                finalgrade = (sum(examgrade) / len(examgrade)) * \
+                    0.7 + (sum(hwgrade) / len(hwgrade)) * 0.3
                 final2deci = "{:.2f}".format(finalgrade)
-                setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], final2deci])
+                setschedule.append([set[0], set[1], set[2], profname,
+                                    profemail, set[6] + ' ' + set[7], set[8], final2deci])
     if setschedule:
         return render_template('course.html', error=error, myschedule=setschedule)
     else:
@@ -391,7 +406,8 @@ def homework():
                 if setgraded[3] == ' ':
                     tempvalue = 0
                     if tempvalue > set[3]:
-                        totalhw.append([setgraded[0], 'Homework ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
+                        totalhw.append(
+                            [setgraded[0], 'Homework ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
                 else:
                     getgrade = []
                     cursor = connection.execute('SELECT DISTINCT Hg.grade '
@@ -424,7 +440,8 @@ def homework():
                     else:
                         maxgrade = max(getgrade)
                         mingrade = min(getgrade)
-                        avggrade = "{:.2f}".format(sum(getgrade) / len(getgrade))
+                        avggrade = "{:.2f}".format(
+                            sum(getgrade) / len(getgrade))
                         totalhw.append(
                             [setgraded[0], 'Homework ' + str(setgraded[1]), setgraded[2], setgraded[3], mingrade, avggrade,
                              maxgrade])
@@ -435,7 +452,8 @@ def homework():
             if set[1] == '' and set[2] == '':
                 pass
             else:
-                totalhw.append([set[0], 'Homework ' + str(set[1]), set[2], ' ', ' ', ' ', ' '])
+                totalhw.append(
+                    [set[0], 'Homework ' + str(set[1]), set[2], ' ', ' ', ' ', ' '])
     if totalhw:
         return render_template('homework.html', error=error, myhw=totalhw)
     else:
@@ -474,7 +492,8 @@ def exam():
                 if setgraded[3] == ' ':
                     tempnum = 0
                     if tempnum > set[3]:
-                        totalexam.append([setgraded[0], 'Exam ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
+                        totalexam.append(
+                            [setgraded[0], 'Exam ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
                 else:
                     if setgraded[3] > set[3]:
                         getgrade = []
@@ -508,8 +527,10 @@ def exam():
                         else:
                             maxgrade = max(getgrade)
                             mingrade = min(getgrade)
-                            avggrade = "{:.2f}".format(sum(getgrade) / len(getgrade))
-                            totalexam.append([setgraded[0], 'Exam ' + str(setgraded[1]), setgraded[2], setgraded[3], mingrade, avggrade, maxgrade])
+                            avggrade = "{:.2f}".format(
+                                sum(getgrade) / len(getgrade))
+                            totalexam.append([setgraded[0], 'Exam ' + str(setgraded[1]),
+                                              setgraded[2], setgraded[3], mingrade, avggrade, maxgrade])
     for set in examnotgraded:
         if [set[0], set[1], set[2]] in tempexam:
             pass
@@ -540,7 +561,8 @@ def Enroll():
     for set in myschedule:
         profname = 'Professor ' + set[3] + ' ' + set[4]
         profemail = set[5] + '@Nittanystate.edu'
-        setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8]])
+        setschedule.append([set[0], set[1], set[2], profname,
+                            profemail, set[6] + ' ' + set[7], set[8]])
     cursor1 = connection.execute('SELECT cid FROM Courses')
     getcourses = cursor1.fetchall()
     courses = []
@@ -624,12 +646,14 @@ def Drop():
     for set in myschedule:
         profname = 'Professor ' + set[3] + ' ' + set[4]
         profemail = set[5] + '@Nittanystate.edu'
-        setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8]])
+        setschedule.append([set[0], set[1], set[2], profname,
+                            profemail, set[6] + ' ' + set[7], set[8]])
     setschedule = []
     mycourses = []
     for set in myschedule:
         tempname = 'Dr. ' + set[3] + ' ' + set[4]
-        setschedule.append([set[0], set[1], set[2], tempname, profemail, set[6] + ' ' + set[7], set[8]])
+        setschedule.append([set[0], set[1], set[2], tempname,
+                            profemail, set[6] + ' ' + set[7], set[8]])
         mycourses.append(set[0])
     if request.method == 'POST':
         getclass = request.form['course']
@@ -723,7 +747,8 @@ def newappointment():
         tempname = 'Dr. ' + set[0] + ' ' + set[1]
         withwho.append(tempname)
     if request.method == 'POST':
-        cursor1 = connection.execute('SELECT DISTINCT P.pemail, P.firstname, P.lastname FROM Professors P;')
+        cursor1 = connection.execute(
+            'SELECT DISTINCT P.pemail, P.firstname, P.lastname FROM Professors P;')
         allprof = cursor1.fetchall()
         getprof = request.form['prof']
         sname = getprof.split(' ')
@@ -740,7 +765,7 @@ def newappointment():
         appdate = tempdate[0] + '/' + tempdate[1] + '/' + tempdate[2]
         gettime = str(request.form['atime'])
         connection.execute(
-           'INSERT INTO Appointment (semail, adate, atime, note, title, witheamil) VALUES (?,?,?,?,?,?)', (myid, appdate, gettime, getnote, gettitle, getpemail))
+            'INSERT INTO Appointment (semail, adate, atime, note, title, witheamil) VALUES (?,?,?,?,?,?)', (myid, appdate, gettime, getnote, gettitle, getpemail))
         connection.commit()
         return redirect('/appointment')
     if myprof:
@@ -749,8 +774,10 @@ def newappointment():
         error = 'invalid input name'
     return render_template('newappointment.html', error=error)
 
+
 forumnum = None
 cidnum = None
+
 
 @app.route('/forum', methods=['POST', 'GET'])
 def forum():
@@ -809,7 +836,8 @@ def createforum():
         courses.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getcid = request.form['cid']
         gettitle = request.form['title']
@@ -835,9 +863,9 @@ def comment():
                                  (myid, mypw, temppostnum))
     forum = cursor1.fetchall()
     cursor1 = connection.execute(
-                                'SELECT DISTINCT Pt.cid, Pt.ptitle, S2.firstname, S2.lastname, Pt.postdesc, Pt.pdate, Pt.ptime '
-                                'FROM Posts Pt, Students S, TA S2 '
-                                'WHERE ? = S.semail AND ? = S.Password AND ? = Pt.post_no AND Pt.semail = S2.semail',
+        'SELECT DISTINCT Pt.cid, Pt.ptitle, S2.firstname, S2.lastname, Pt.postdesc, Pt.pdate, Pt.ptime '
+        'FROM Posts Pt, Students S, TA S2 '
+        'WHERE ? = S.semail AND ? = S.Password AND ? = Pt.post_no AND Pt.semail = S2.semail',
                                 (myid, mypw, temppostnum))
     forum1 = cursor1.fetchall()
     cursor1 = connection.execute('SELECT DISTINCT Pt.cid, Pt.ptitle, S2.firstname, S2.lastname, Pt.postdesc, Pt.pdate, Pt.ptime '
@@ -886,7 +914,8 @@ def comment():
     print(temppostnum)
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")
         getnote = request.form['com']
         connection.execute(
@@ -1023,7 +1052,8 @@ def compost():
         allMember.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getReceiver = request.form['messageto']
         if getReceiver in allMember:
@@ -1069,7 +1099,7 @@ def readinbox():
     if message:
         return render_template('messageread.html', error=error, message=message)
     else:
-            error = "The person you send to is invalid. Please try again."
+        error = "The person you send to is invalid. Please try again."
     return render_template('messageread.html', error=error)
 
 
@@ -1088,8 +1118,9 @@ def readsent():
     if message:
         return render_template('messageread2.html', error=error, message=message)
     else:
-            error = "The person you send to is invalid. Please try again."
+        error = "The person you send to is invalid. Please try again."
     return render_template('messageread2.html', error=error)
+
 
 tempanum = None
 cidanum = None
@@ -1171,7 +1202,8 @@ def mainTA():
         mygender = 'Female'
     elif myinfo[0][4] == 'M':
         mygender = 'Male'
-    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1], myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
+    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1],
+                    myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
     setinfo = [(None, None, None, None, None)]
     setinfo[0] = changemyinfo
     # my course
@@ -1186,7 +1218,8 @@ def mainTA():
     for set in myschedule:
         profname = 'Professor ' + set[3] + ' ' + set[4]
         profemail = set[5] + '@Nittanystate.edu'
-        setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7]])
+        setschedule.append([set[0], set[1], set[2], profname,
+                            profemail, set[6] + ' ' + set[7]])
     # my course
     cursor = connection.execute('SELECT E.cid, H.hw_no, H.hwdesc, HG.grade '
                                 'FROM TA S, Enrolls E, Homeworks H, Homeworks_grade HG '
@@ -1232,7 +1265,8 @@ def profileTA():
             tempgender = 'Female'
         elif set[5] == 'M':
             tempgender = 'Male'
-        getinfo.append([set[0], set[1], set[2], set[3], set[4], tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
+        getinfo.append([set[0], set[1], set[2], set[3], set[4],
+                        tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
     if getinfo:
         return render_template('profileTA.html', error=error, myinfo=getinfo)
     else:
@@ -1255,7 +1289,8 @@ def changeprofileTA():
             tempgender = 'Female'
         elif set[5] == 'M':
             tempgender = 'Male'
-        getinfo.append([set[0], set[1], set[2], set[3], set[4], tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
+        getinfo.append([set[0], set[1], set[2], set[3], set[4],
+                        tempgender, set[6], set[7], set[8], set[9], set[10], set[11]])
     if request.method == 'POST':
         getfname = request.form['fname']
         getlname = request.form['lname']
@@ -1289,7 +1324,7 @@ def changeprofileTA():
             connection.commit()
         else:
             connection.execute(
-            'INSERT INTO Zipcodes (zipcode, city) VALUES (?,?)', (getzipcode, getcity))
+                'INSERT INTO Zipcodes (zipcode, city) VALUES (?,?)', (getzipcode, getcity))
             connection.commit()
         if getcity in cities:
             connection.execute(
@@ -1300,7 +1335,7 @@ def changeprofileTA():
             connection.commit()
         else:
             connection.execute(
-            'INSERT INTO Cities (city, state) VALUES (?,?)', (getcity, getstate))
+                'INSERT INTO Cities (city, state) VALUES (?,?)', (getcity, getstate))
             connection.commit()
         return redirect('/profileTA')
     if getinfo:
@@ -1379,7 +1414,6 @@ def classmatesTA():
     return render_template('classmatesTA.html', error=error)
 
 
-
 @app.route('/courseTA', methods=['POST', 'GET'])
 def courseTA():
     global enrollnotice
@@ -1421,22 +1455,28 @@ def courseTA():
             examgrade.append(set2[0])
         tempnum = 1
         if len(examgrade) == 0 and len(hwgrade) == 0:
-            setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], ' '])
+            setschedule.append([set[0], set[1], set[2], profname,
+                                profemail, set[6] + ' ' + set[7], set[8], ' '])
         elif len(examgrade) == 0:
             finalgrade = (sum(hwgrade) / len(hwgrade))
             final2deci = "{:.2f}".format(finalgrade)
-            setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], final2deci])
+            setschedule.append([set[0], set[1], set[2], profname,
+                                profemail, set[6] + ' ' + set[7], set[8], final2deci])
         elif len(hwgrade) == 0:
             finalgrade = (sum(examgrade) / len(examgrade))
             final2deci = "{:.2f}".format(finalgrade)
-            setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], final2deci])
+            setschedule.append([set[0], set[1], set[2], profname,
+                                profemail, set[6] + ' ' + set[7], set[8], final2deci])
         else:
             if ' ' in examgrade or ' ' in hwgrade:
-                setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], ' '])
+                setschedule.append(
+                    [set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], ' '])
             else:
-                finalgrade = (sum(examgrade) / len(examgrade)) * 0.7 + (sum(hwgrade) / len(hwgrade)) * 0.3
+                finalgrade = (sum(examgrade) / len(examgrade)) * \
+                    0.7 + (sum(hwgrade) / len(hwgrade)) * 0.3
                 final2deci = "{:.2f}".format(finalgrade)
-                setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8], final2deci])
+                setschedule.append([set[0], set[1], set[2], profname,
+                                    profemail, set[6] + ' ' + set[7], set[8], final2deci])
     if setschedule:
         return render_template('courseTA.html', error=error, myschedule=setschedule)
     else:
@@ -1475,7 +1515,8 @@ def homeworkTA():
                 if setgraded[3] == ' ':
                     tempvalue = 0
                     if tempvalue > set[3]:
-                        totalhw.append([setgraded[0], 'Homework ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
+                        totalhw.append(
+                            [setgraded[0], 'Homework ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
                 else:
                     getgrade = []
                     cursor = connection.execute('SELECT DISTINCT Hg.grade '
@@ -1508,19 +1549,21 @@ def homeworkTA():
                     else:
                         maxgrade = max(getgrade)
                         mingrade = min(getgrade)
-                        avggrade = "{:.2f}".format(sum(getgrade) / len(getgrade))
+                        avggrade = "{:.2f}".format(
+                            sum(getgrade) / len(getgrade))
                         totalhw.append(
                             [setgraded[0], 'Homework ' + str(setgraded[1]), setgraded[2], setgraded[3], mingrade, avggrade,
                              maxgrade])
     for set in hwnotgraded:
         if [set[0], set[1], set[2]] in temphw:
             print([set[0], set[1], set[2]])
-            print('okay')#totalhw.append(set)
+            print('okay')  # totalhw.append(set)
         else:
             if set[1] == '' and set[2] == '':
                 pass
             else:
-                totalhw.append([set[0], 'Homework ' + str(set[1]), set[2], ' ', ' ', ' ', ' '])
+                totalhw.append(
+                    [set[0], 'Homework ' + str(set[1]), set[2], ' ', ' ', ' ', ' '])
     if totalhw:
         return render_template('homeworkTA.html', error=error, myhw=totalhw)
     else:
@@ -1559,7 +1602,8 @@ def examTA():
                 if setgraded[3] == ' ':
                     tempnum = 0
                     if tempnum > set[3]:
-                        totalexam.append([setgraded[0], 'Exam ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
+                        totalexam.append(
+                            [setgraded[0], 'Exam ' + str(setgraded[1]), setgraded[2], ' ', ' ', ' ', ' '])
                 else:
                     if setgraded[3] > set[3]:
                         getgrade = []
@@ -1594,8 +1638,10 @@ def examTA():
                         else:
                             maxgrade = max(getgrade)
                             mingrade = min(getgrade)
-                            avggrade = "{:.2f}".format(sum(getgrade) / len(getgrade))
-                            totalexam.append([setgraded[0], 'Exam ' + str(setgraded[1]), setgraded[2], setgraded[3], mingrade, avggrade, maxgrade])
+                            avggrade = "{:.2f}".format(
+                                sum(getgrade) / len(getgrade))
+                            totalexam.append([setgraded[0], 'Exam ' + str(setgraded[1]),
+                                              setgraded[2], setgraded[3], mingrade, avggrade, maxgrade])
     for set in examnotgraded:
         if [set[0], set[1], set[2]] in tempexam:
             print([set[0], set[1], set[2]])
@@ -1630,7 +1676,8 @@ def EnrollTA():
     for set in myschedule:
         profname = 'Professor ' + set[3] + ' ' + set[4]
         profemail = set[5] + '@Nittanystate.edu'
-        setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8]])
+        setschedule.append([set[0], set[1], set[2], profname,
+                            profemail, set[6] + ' ' + set[7], set[8]])
     cursor1 = connection.execute('SELECT cid FROM Courses')
     getcourses = cursor1.fetchall()
     courses = []
@@ -1716,12 +1763,14 @@ def DropTA():
     for set in myschedule:
         profname = 'Professor ' + set[3] + ' ' + set[4]
         profemail = set[5] + '@Nittanystate.edu'
-        setschedule.append([set[0], set[1], set[2], profname, profemail, set[6] + ' ' + set[7], set[8]])
+        setschedule.append([set[0], set[1], set[2], profname,
+                            profemail, set[6] + ' ' + set[7], set[8]])
     setschedule = []
     mycourses = []
     for set in myschedule:
         tempname = 'Dr. ' + set[3] + ' ' + set[4]
-        setschedule.append([set[0], set[1], set[2], tempname, profemail, set[6] + ' ' + set[7], set[8]])
+        setschedule.append([set[0], set[1], set[2], tempname,
+                            profemail, set[6] + ' ' + set[7], set[8]])
         mycourses.append(set[0])
     print(mycourses)
     if request.method == 'POST':
@@ -1782,7 +1831,8 @@ def appointmentTA():
     myappointment = cursor1.fetchall()
     if request.method == 'POST':
         dateTime = datetime.now()
-        getDate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getDate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         getdate = request.form['date']
         gettime = request.form['time']
         getwith = request.form['email']
@@ -1817,7 +1867,8 @@ def newappointmentTA():
         tempname = 'Dr. ' + set[0] + ' ' + set[1]
         withwho.append(tempname)
     if request.method == 'POST':
-        cursor1 = connection.execute('SELECT DISTINCT P.pemail, P.firstname, P.lastname FROM Professors P;')
+        cursor1 = connection.execute(
+            'SELECT DISTINCT P.pemail, P.firstname, P.lastname FROM Professors P;')
         allprof = cursor1.fetchall()
         getprof = request.form['prof']
         sname = getprof.split(' ')
@@ -1834,7 +1885,7 @@ def newappointmentTA():
         appdate = tempdate[0] + '/' + tempdate[1] + '/' + tempdate[2]
         gettime = str(request.form['atime'])
         connection.execute(
-           'INSERT INTO Appointment (semail, adate, atime, note, title, witheamil) VALUES (?,?,?,?,?,?)', (myid, appdate, gettime, getnote, gettitle, getpemail))
+            'INSERT INTO Appointment (semail, adate, atime, note, title, witheamil) VALUES (?,?,?,?,?,?)', (myid, appdate, gettime, getnote, gettitle, getpemail))
         connection.commit()
         return redirect('/appointmentTA')
     if myprof:
@@ -1901,7 +1952,8 @@ def createforumTA():
         courses.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getcid = request.form['cid']
         gettitle = request.form['title']
@@ -1979,7 +2031,8 @@ def commentTA():
     print(temppostnum)
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")
         getnote = request.form['com']
         connection.execute(
@@ -2116,7 +2169,8 @@ def compostTA():
         allMember.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getReceiver = request.form['messageto']
         if getReceiver in allMember:
@@ -2162,7 +2216,7 @@ def readinboxTA():
     if message:
         return render_template('messagereadTA.html', error=error, message=message)
     else:
-            error = "The person you send to is invalid. Please try again."
+        error = "The person you send to is invalid. Please try again."
     return render_template('messagereadTA.html', error=error)
 
 
@@ -2181,7 +2235,7 @@ def readsentTA():
     if message:
         return render_template('messageread2TA.html', error=error, message=message)
     else:
-            error = "The person you send to is invalid. Please try again."
+        error = "The person you send to is invalid. Please try again."
     return render_template('messageread2TA.html', error=error)
 
 
@@ -2298,7 +2352,8 @@ def createannouncementsP():
         courses.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getcid = request.form['cid']
         gettitle = request.form['title']
@@ -2336,15 +2391,16 @@ def professor():
     connection = sql.connect('database.db')
     # my info
     cursor = connection.execute(
-    'SELECT P.firstname, P.lastname, P.pemail, P.age, P.gender, P.title FROM Professors P WHERE ? = P.pemail AND ? = P.password;',
-    (myid, mypw))
+        'SELECT P.firstname, P.lastname, P.pemail, P.age, P.gender, P.title FROM Professors P WHERE ? = P.pemail AND ? = P.password;',
+        (myid, mypw))
     myinfo = cursor.fetchall()
     mygender = None
     if myinfo[0][4] == 'F':
         mygender = 'Female'
     elif myinfo[0][4] == 'M':
         mygender = 'Male'
-    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1], myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
+    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1],
+                    myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
     setinfo = [(None, None, None, None, None)]
     setinfo[0] = changemyinfo
     # my Students
@@ -2409,7 +2465,8 @@ def profileP():
         mygender = 'Male'
     myoffice = myinfo[0][6] + ' ' + myinfo[0][7]
     mydept = myinfo[0][8] + ': ' + myinfo[0][9]
-    setinfo = [[myinfo[0][0], myinfo[0][1], myinfo[0][2], myinfo[0][3], myinfo[0][4], mygender, myoffice, mydept]]
+    setinfo = [[myinfo[0][0], myinfo[0][1], myinfo[0][2],
+                myinfo[0][3], myinfo[0][4], mygender, myoffice, mydept]]
     print(setinfo)
     if setinfo:
         return render_template('profileP.html', error=error, myinfo=setinfo)
@@ -2432,7 +2489,8 @@ def changeprofileP():
         mygender = 'Female'
     elif myinfo[0][5] == 'M':
         mygender = 'Male'
-    getinfo = [[myinfo[0][0], myinfo[0][1], myinfo[0][2], myinfo[0][3], myinfo[0][4], mygender, myinfo[0][6], myinfo[0][7]]]
+    getinfo = [[myinfo[0][0], myinfo[0][1], myinfo[0][2], myinfo[0]
+                [3], myinfo[0][4], mygender, myinfo[0][6], myinfo[0][7]]]
     if request.method == 'POST':
         getfname = request.form['fname']
         getlname = request.form['lname']
@@ -2587,12 +2645,14 @@ def homeworkGradeP():
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Homework ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     for set in TAhw:
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Homework ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     if request.method == 'POST':
         print('okay')
         gradeemail = request.form['email']
@@ -2645,7 +2705,7 @@ def newhomework():
         temptitle = int(request.form['title'])
         tempnote = request.form['note']
         connection.execute(
-           'INSERT INTO Homeworks (cid, sec_no, hw_no, hwdesc) VALUES (?,?,?,?)', (tempcourse, tempsection, temptitle, tempnote))
+            'INSERT INTO Homeworks (cid, sec_no, hw_no, hwdesc) VALUES (?,?,?,?)', (tempcourse, tempsection, temptitle, tempnote))
         connection.commit()
         cursor = connection.execute('SELECT S.semail '
                                     'FROM Students S, Enrolls E, Sections Sec, Professor_teach PT, Professors P '
@@ -2772,12 +2832,14 @@ def examGradeP():
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Exam ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     for set in TAhw:
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Exam ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     if request.method == 'POST':
         gradeemail = request.form['email']
         justemail = gradeemail.split('@')
@@ -2860,7 +2922,7 @@ def newexam():
         temptitle = int(request.form['title'])
         tempnote = request.form['note']
         connection.execute(
-           'INSERT INTO Exams (cid, sec_no, exam_no, examdesc) VALUES (?,?,?,?)', (tempcourse, tempsection, temptitle, tempnote))
+            'INSERT INTO Exams (cid, sec_no, exam_no, examdesc) VALUES (?,?,?,?)', (tempcourse, tempsection, temptitle, tempnote))
         connection.commit()
         cursor = connection.execute('SELECT S.semail '
                                     'FROM Students S, Enrolls E, Sections Sec, Professor_teach PT, Professors P '
@@ -3017,7 +3079,8 @@ def compostp():
         allMember.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getReceiver = request.form['messageto']
         if getReceiver in allMember:
@@ -3063,7 +3126,7 @@ def readinboxp():
     if message:
         return render_template('messagereadp.html', error=error, message=message)
     else:
-            error = "The person you send to is invalid. Please try again."
+        error = "The person you send to is invalid. Please try again."
     return render_template('messagereadp.html', error=error)
 
 
@@ -3082,7 +3145,7 @@ def readsentp():
     if message:
         return render_template('messageread2p.html', error=error, message=message)
     else:
-            error = "The person you send to is invalid. Please try again."
+        error = "The person you send to is invalid. Please try again."
     return render_template('messageread2p.html', error=error)
 
 
@@ -3218,7 +3281,8 @@ def createforumP():
         courses.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getcid = request.form['cid']
         gettitle = request.form['title']
@@ -3300,7 +3364,8 @@ def commentP():
     print(temppostnum)
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")
         getnote = request.form['com']
         connection.execute(
@@ -3329,7 +3394,8 @@ def TATA():
         mygender = 'Female'
     elif myinfo[0][4] == 'M':
         mygender = 'Male'
-    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1], myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
+    changemyinfo = [myinfo[0][0] + ' ' + myinfo[0][1],
+                    myinfo[0][2], myinfo[0][3], mygender, myinfo[0][5]]
     setinfo = [(None, None, None, None, None)]
     setinfo[0] = changemyinfo
     # my Students
@@ -3472,12 +3538,14 @@ def homeworkGradeTATA():
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Homework ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     for set in TAhw:
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Homework ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     if request.method == 'POST':
         print('okay')
         gradeemail = request.form['email']
@@ -3525,12 +3593,14 @@ def examGradeTATA():
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Exam ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     for set in TAhw:
         tempstudents = set[0] + ' ' + set[1]
         tempemail = set[2] + '@Nittanystate.edu'
         tempname = 'Exam ' + str(set[5])
-        sethw.append([tempstudents, tempemail, set[3], set[4], tempname, set[6]])
+        sethw.append([tempstudents, tempemail, set[3],
+                      set[4], tempname, set[6]])
     if request.method == 'POST':
         gradeemail = request.form['email']
         justemail = gradeemail.split('@')
@@ -3625,7 +3695,8 @@ def createannouncementsTATA():
         courses.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getcid = request.form['cid']
         gettitle = request.form['title']
@@ -3714,7 +3785,8 @@ def createforumTATA():
         courses.append(set[0])
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")  # when insert
         getcid = request.form['cid']
         gettitle = request.form['title']
@@ -3796,7 +3868,8 @@ def commentTATA():
     print(temppostnum)
     if request.method == 'POST':
         dateTime = datetime.now()
-        getdate = str(dateTime.year) + "/" + str(dateTime.month) + "/" + str(dateTime.day)
+        getdate = str(dateTime.year) + "/" + \
+            str(dateTime.month) + "/" + str(dateTime.day)
         gettime = dateTime.strftime("%H:%M:%S")
         getnote = request.form['com']
         connection.execute(
@@ -3813,5 +3886,3 @@ def commentTATA():
 
 if __name__ == '__main__':
     app.run()
-
-
